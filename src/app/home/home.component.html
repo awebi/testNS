@@ -1,0 +1,43 @@
+<ActionBar class="action-bar">
+    <Label class="action-bar-title" text="Home"></Label>
+</ActionBar>
+
+<GridLayout class="page" class="">
+    <!-- Add your page content here -->
+    <StackLayout>
+        <GridLayout columns="*", rows="auto, auto" class="mg-5">
+            <label text="Hi," row="0" col="0" class="h1 txt-wgt-9 mg-b-0"></label>
+            <label text="What are you looking for?" row="1" col="0" class="h1 txt-wgt-9 mg-b-0"></label>
+        </GridLayout>
+        <SearchBar [(ngModel)] = "searchValue" (textChange)="onSubmit($event)" hint="Search Media" class="br-5 bd-solid"></SearchBar>
+        <ListView [items] = "filtered | async" [visibility]="showSearchResult" class="mg-5">
+            <ng-template let-item="item">
+                <!-- <StackLayout (tap)="chooseFile(item)" class=" pd-10">
+                    <label text="{{item.name}}"></label>
+                </StackLayout> -->
+                <GridLayout columns="auto, *" rows="auto" (tap)="chooseFile(item)" class="pd-10 mg-1">
+                    <label row="0" col="0" [text]="getHex(item.type).hex" class="fa h1 pd-5 {{getHex(item.type).class}} v-align-middle"></label>
+                    <label row="0" col="1" text="{{item.name}}" class="h2 mg-left-5  v-align-middle"></label>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+        <GridLayout columns="*, *" rows="auto, auto" class="text-white mg-5" [visibility] = "showSummary">
+            <GridLayout row="0", col="0" columns="auto, *" class="mg-t-1 mg-r-1 pd-10 bg-red-primary br-5">
+                <label text="&#xe03d;" class="fa h1 text-white" row="0" col="0"></label>
+                <label [text] = "musicCount" row="0" col="1" class="txt-align-right v-align-middle text-white h1"></label>
+            </GridLayout>
+            <GridLayout row="0", col="1" columns="auto, *" class="mg-t-1 mg-l-1 pd-10 bg-purple-primary br-5">
+                    <label text="&#xe54d;" class="fa h1 text-white" row="0" col="0"></label>
+                    <label [text] = "videosCount" row="0" col="1" class="txt-align-right v-align-middle text-white h1"></label>
+            </GridLayout>
+            <GridLayout row="1", col="0" columns="auto, *" class="mg-t-1 mg-r-1 pd-10 bg-green-primary br-5">
+                    <label text="&#xe24d;" class="fa h1 text-white" row="0" col="0"></label>
+                    <label [text] = "documentCount" row="0" col="1" class="txt-align-right v-align-middle text-white h1"></label>
+            </GridLayout>
+            <GridLayout row="1", col="1" columns="auto, *" class="mg-t-1 mg-l-1 pd-10 bg-blue-primary br-5">
+                    <label text="&#xe251;" class="fa h1 text-white" row="0" col="0"></label>
+                    <label [text] = "imageCount" row="0" col="1" class="txt-align-right v-align-middle text-white h1"></label>
+            </GridLayout>
+        </GridLayout>
+    </StackLayout>
+</GridLayout>
